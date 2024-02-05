@@ -1,0 +1,37 @@
+
+(* Remove Last exercise *)
+
+let l1 = { head <= 0; size <= 0} (* 0 in head signals null *)
+in let add_front = proc (x) { proc (l) {
+   	      begin
+	         l.head <={ data <=x; next <= l.head };
+		 l.size <= l.size+1
+              end
+	      } }
+
+in letrec remove_last_helper (node) = 
+  if number?(node.next.next)
+  then
+  node.next <= 0
+  else (remove_last_helper node.next)
+      
+in let remove_last = proc(l){
+  if (number?(l.head.next))
+  then 
+    (begin
+      l.head <= l.head.next;
+      l.size <= l.size - 1
+    end)
+  else
+    (begin 
+      (remove_last_helper l.head);
+      l.size <= l.size - 1
+    end)
+}
+in begin
+     ((add_front 2) l1);
+     ((add_front 3) l1);
+     ((add_front 4) l1);
+     (remove_last l1);
+     debug(l1)  (* required inspect the list *)
+   end

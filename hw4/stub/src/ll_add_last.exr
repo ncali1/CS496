@@ -1,0 +1,34 @@
+
+(* Add Last exercise *)
+
+let l1 = { head <= 0; size <= 0} (* 0 in head signals null *)
+
+in letrec add_last_helper (node) = 
+proc(x){
+  if number?(node.next)
+  then
+    (node.next <= {data <= x; next <=0})
+    else ((add_last_helper node.next)x)
+}
+
+
+in let add_last = proc(x) {proc(l){
+  if number?(l.head)
+  then
+    begin
+        l.head <= {data <= x; next<=0};
+        l.size <= l.size + 1
+    end
+  else
+    begin 
+      ((add_last_helper l.head) x);
+      l.size <= l.size + 1
+    end
+  }
+}
+in begin
+     ((add_last 2) l1);
+     ((add_last 3) l1);
+     ((add_last 4) l1);
+     debug(l1)  (* required inspect the list *)
+   end
